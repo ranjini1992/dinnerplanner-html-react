@@ -1,0 +1,15 @@
+.Sidebar {
+  height: 450px;
+  width: 20%;
+  padding: 10px 10px 10px 10px;
+  box-shadow: 4px 4px 4px -4px rgba(0, 0, 0, 0.75);
+}
+
+.guest-text {
+  width: 50px;
+}
+
+.full-width {
+  width: 100%;
+  text-align: left;
+}

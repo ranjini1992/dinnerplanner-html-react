@@ -11,7 +11,7 @@ class Welcome extends Component {
         </p>
         
         <Link to="/search">
-            <button>Start planning</button>
+            <button className="next-btn">Start planning</button>
         </Link>
       </div>
     );

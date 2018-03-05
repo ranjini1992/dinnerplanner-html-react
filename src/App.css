@@ -1,0 +1,23 @@
+.App-title {
+	padding: 1em;
+	color: black;
+	background-color: lightgray;
+	text-align: center;
+	box-shadow: 4px 4px 4px -4px rgba(0, 0, 0, 0.75);
+}
+
+.next-btn {
+  width: 125px;
+  height: 35px;
+  padding: 9px 12px;	
+  border-radius: 12px;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  color: #ffffff;
+  font-size: 14px;
+  box-shadow: 4px 4px 4px -4px rgba(0, 0, 0, 0.75);
+}
+
+.next-btn:hover {
+  background-color: #f7b554;
+}
