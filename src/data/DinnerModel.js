@@ -5,7 +5,7 @@ const httpOptions = {
 const DinnerModel = function () {
 
   let numberOfGuests = 4;
-  let selected_dishes: []
+  let selected_dishes = [];
 
   let observers = [];
 

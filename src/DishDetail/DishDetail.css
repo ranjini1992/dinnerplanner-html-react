@@ -1,0 +1,59 @@
+.DishDetail {
+  width: 80%;
+  padding: 10px 10px 10px 10px;
+  box-shadow: 4px 4px 4px -4px rgba(0, 0, 0, 0.75);
+}
+
+.dish-detail-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-self: flex-end;
+  position: absolute;
+}
+
+.dish-image {
+  width: 200px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  padding: 1em;
+  height:150px;
+  text-align: center;
+  box-shadow: 2px 2px 2px -2px rgba(0, 0, 0, 0.75);
+}
+
+.image-box-md {
+  width: 120px;
+  height: 120px;
+}
+
+.intro-box {
+  padding: 1em;
+  width: 45%;
+  float: left;
+  border: 1px solid #ccc;
+  color: black;
+}
+
+.ingredient-box {
+  padding: 1em;
+  width: 45%;
+  float: right;
+  text-align: center;
+  border: 1px solid #ccc;
+  color: black;
+  background-color: wheat;
+  box-shadow: 2px 2px 2px -2px rgba(0, 0, 0, 0.75);
+}
+
+.image-box-xs {
+  background-color: white;
+  width: 50px;
+  height: 50px;
+}
+
+
+.full-width {
+  width: 100%;
+  text-align: center;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './DishDetail.css';
 import {modelInstance} from '../data/DinnerModel';
+import Sidebar from '../Sidebar/Sidebar';
 import { Link } from 'react-router-dom';
 
 class DishDetail extends Component {
@@ -25,6 +26,23 @@ class DishDetail extends Component {
         status: 'ERROR'
       })
     })
+
+  }
+  getIngredientRow = () => {
+    if(!this.state.dish.extendedIngredients){
+      return;
+    }
+    const ingredients = this.state.dish.extendedIngredients.map((ingredient) =>  <tr key={ingredient.id}>
+        <th> {ingredient.amount.toFixed(1) + ' ' + ingredient.unit}</th>
+         <th className="full-width"> {ingredient.name}</th>
+        <th> <img className="image-box-xs" src={ingredient.image} /> </th>
+      </tr>
+      )
+    return ingredients;
+  }
+
+  addDish = () => {
+    this.props.model.addDishToMenu(this.state.dish);
   }
 
   render() {
@@ -39,13 +57,34 @@ class DishDetail extends Component {
         break;
       case 'LOADED':
         dish = <div>
-                <h3> {this.state.dish.title} </h3> 
-                <Link to="/search">
-                  <button className="next-btn">Back</button>
-                </Link>
-                <Link to="/search">
-                  <button onClick className="next-btn">Add</button>
-                </Link> 
+                <div className= "intro-box">
+                  <h3> {this.state.dish.title} </h3> 
+                  <figure className="dish-image" key={this.state.dish.id}>
+                    <img className="image-box-md" src={this.state.dish.image} /> 
+                    <figcaption>
+                      Ready in {this.state.dish.readyInMinutes} minutes
+                    </figcaption>      
+                  </figure>
+                  <h3> PREPARATION </h3>
+                  <p>{this.state.dish.instructions}</p>
+
+                  <Link to="/search">
+                    <button className="next-btn">Back to search</button>
+                  </Link>
+                </div>
+                <div className= "ingredient-box">
+                  <h3> INGREDIENTS FOR {this.props.model.getNumberOfGuests()} PEOPLE </h3>
+
+                  <table className="full-width">
+                    <tbody>
+                      {this.getIngredientRow()}
+                    </tbody>
+                  </table>
+                  <Link to="/search">
+                    <button onClick={this.addDish} className="next-btn">Add to menu</button>
+                  </Link>
+                 
+                </div>
               </div>
         break;
       default:
@@ -53,9 +92,11 @@ class DishDetail extends Component {
         break;
     }
     return (
-        <div className="DishDetail">
-          <h3>DishDetail</h3>
-            {dish}
+        <div className="dish-detail-container" >
+          <Sidebar model={this.props.model}/>
+          <div className="DishDetail">
+              {dish}
+          </div>
         </div>
     );
   }
