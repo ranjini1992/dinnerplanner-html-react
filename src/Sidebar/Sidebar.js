@@ -29,7 +29,7 @@ class Sidebar extends Component {
 
   // in our update function we modify the state which will
   // cause the component to re-render
-  update() {
+  update(message) {
     this.setState({
       numberOfGuests: this.props.model.getNumberOfGuests(),
       menu: this.props.model.getFullMenu()
@@ -42,22 +42,20 @@ class Sidebar extends Component {
   }
 
   addGuest = () => {
-    this.state.numberOfGuests+= 1
-    this.props.model.setNumberOfGuests(this.state.numberOfGuests);
+    this.props.model.setNumberOfGuests(this.state.numberOfGuests + 1);
   }
 
   removeGuest = () => {
-    this.state.numberOfGuests-= 1
-    this.props.model.setNumberOfGuests(this.state.numberOfGuests);
+    this.props.model.setNumberOfGuests(this.state.numberOfGuests - 1);
   }
 
   getDishRow = () => {
     if(!this.state.menu){
       return;
     }
-    const rows = this.state.menu.map((dish) =>  <tr>
+    const rows = this.state.menu.map((dish) =>  <tr key={dish.id}>
          <th className="full-width"> {dish.title}</th>
-         <th className="full-width"> {dish.pricePerServing}</th>
+         <th className="full-width"> {(this.state.numberOfGuests * dish.pricePerServing).toFixed(1)}</th>
       </tr>
       )
     return rows;
@@ -82,12 +80,15 @@ class Sidebar extends Component {
               <th className="full-width">Cost</th>
             </tr>
             {this.getDishRow()}
-
+             <tr>
+              <th className="full-width">Total</th>
+              <th className="full-width">{this.props.model.getTotalMenuPrice().toFixed(1)}</th>
+            </tr>
             </tbody>
            </table> 
                   
          <Link to="/summary">
-          <button className="next-btn" onClick={this.confirmDinner}>Confirm Dinner</button>
+          <button className="next-btn" disabled={this.state.menu.length == 0}>Confirm Dinner</button>
         </Link>
       </div>
     );

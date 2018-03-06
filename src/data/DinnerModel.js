@@ -24,28 +24,29 @@ const DinnerModel = function () {
     return selected_dishes;
   }
 
+  //Returns the total price of the menu (all the ingredients multiplied by number of guests).
+  this.getTotalMenuPrice = function() {
+    let total_menu_price = 0;
+    for(let i = 0; i < selected_dishes.length; i++){
+      let dish = selected_dishes[i];
+      total_menu_price += dish.pricePerServing * numberOfGuests;
+    }
+    return total_menu_price;
+
+  }
+
   this.getDishTypeList = function(){
     return dish_types;
   }
 
   this.addDishToMenu = function(selectedDish) {
-    for(var i = 0; i < selected_dishes.length; i++){
+    for(let i = 0; i < selected_dishes.length; i++){
         if (selected_dishes[i].id === selectedDish.id) {
           return;
         }
       }
     selected_dishes.push(selectedDish);
     notifyObservers("add_dish");
-  }
-
-  this.removeDishFromMenu = function(id) {
-    for (var key = selected_dishes.length - 1; key >= 0; key --) {
-        if (selected_dishes[key].id === id) {
-            selected_dishes.splice(key, 1);
-            break;       
-        }
-    }
-    notifyObservers("remove_dish"); 
   }
 
   // API Calls

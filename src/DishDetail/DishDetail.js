@@ -28,6 +28,7 @@ class DishDetail extends Component {
     })
 
   }
+
   getIngredientRow = () => {
     if(!this.state.dish.extendedIngredients){
       return;
@@ -35,7 +36,7 @@ class DishDetail extends Component {
     const ingredients = this.state.dish.extendedIngredients.map((ingredient) =>  <tr key={ingredient.id}>
         <th> {ingredient.amount.toFixed(1) + ' ' + ingredient.unit}</th>
          <th className="full-width"> {ingredient.name}</th>
-        <th> <img className="image-box-xs" src={ingredient.image} /> </th>
+        <th> <img className="image-box-xs" src={ingredient.image} alt={ingredient.name} /> </th>
       </tr>
       )
     return ingredients;
@@ -60,7 +61,7 @@ class DishDetail extends Component {
                 <div className= "intro-box">
                   <h3> {this.state.dish.title} </h3> 
                   <figure className="dish-image" key={this.state.dish.id}>
-                    <img className="image-box-md" src={this.state.dish.image} /> 
+                    <img className="image-box-md" src={this.state.dish.image} alt={this.state.dish.title} /> 
                     <figcaption>
                       Ready in {this.state.dish.readyInMinutes} minutes
                     </figcaption>      

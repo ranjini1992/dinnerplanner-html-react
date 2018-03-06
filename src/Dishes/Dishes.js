@@ -50,9 +50,9 @@ class Dishes extends Component {
         break;
       case 'LOADED':
         dishesList = this.state.dishes.map((dish) =>
-        <Link to={"/dish/" + dish.id} >
+        <Link to={"/dish/" + dish.id} key={dish.id}>
             <figure className="dish-gallery" key={dish.id}>
-              <img className="image-box-sm" src={this.returnImageLink(dish.image)} /> 
+              <img className="image-box-sm" src={this.returnImageLink(dish.image)} alt={dish.title}/> 
               <figcaption>
                 {dish.title}
               </figcaption>      

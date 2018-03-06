@@ -1,0 +1,21 @@
+.recipe-gallery {
+  width: 20%;
+  float: left;
+  margin: 5px;
+  border: 1px solid #ccc;
+  padding: 1em;
+  height: 150px;
+  text-align: center;
+  box-shadow: 2px 2px 2px -2px rgba(0, 0, 0, 0.75);
+}
+
+.summary-row {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.image-box-lg {
+  width: 135px;
+  height: 135px;
+}
