@@ -22,9 +22,10 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">{this.state.title}</h1>
           
-          {/* We rended diffrent component based on the path */}
           <Route exact path="/" component={Welcome}/>
-          <Route path="/search" render={() => <SelectDish model={modelInstance}/>}/>
+          <Route path="/search/:query?/:type?" 
+            render={(props) => <SelectDish model={modelInstance} 
+            query={props.match.params.query} type={props.match.params.type}/>}/>
           <Route path="/summary" render={() => <Summary model={modelInstance}/>}/>
           <Route path="/print" render={() => <Print model={modelInstance}/>}/>
           <Route path="/dish/:id" render={(props) => <DishDetail model={modelInstance} id={props.match.params.id}/>}/>

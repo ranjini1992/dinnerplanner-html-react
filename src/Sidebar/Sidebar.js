@@ -88,7 +88,7 @@ class Sidebar extends Component {
            </table> 
                   
          <Link to="/summary">
-          <button className="next-btn" disabled={this.state.menu.length == 0}>Confirm Dinner</button>
+          <button className="next-btn" disabled={this.state.menu.length === 0}>Confirm Dinner</button>
         </Link>
       </div>
     );

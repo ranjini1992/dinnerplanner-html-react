@@ -1,0 +1,10 @@
+.Searchbar {
+  height: 100px;
+  padding: 10px 10px 10px 10px;
+  box-shadow: 4px 4px 4px -4px rgba(0, 0, 0, 0.75);
+}
+
+.query-field {
+  width: 150px;
+  height: 25px;
+}

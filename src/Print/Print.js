@@ -3,7 +3,7 @@ import './Print.css';
 import { Link } from 'react-router-dom';
 
 class Print extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props)
         this.state = {
       numberOfGuests: this.props.model.getNumberOfGuests(),

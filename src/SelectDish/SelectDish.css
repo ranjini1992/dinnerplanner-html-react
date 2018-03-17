@@ -1,7 +1,9 @@
 .SelectDish {
   display: flex;
-  width: 100%;
   flex-direction: row;
-  align-self: flex-end;
-  position: absolute;
+}
+
+.row-style {
+  width: 80%;
+  display: block;
 }

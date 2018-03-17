@@ -9,7 +9,7 @@ const DinnerModel = function () {
 
   let observers = [];
 
-  let dish_types = ["main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink"];
+  const dish_types = ["main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink"];
 
   this.setNumberOfGuests = function (num) {
     numberOfGuests = num;
@@ -51,8 +51,20 @@ const DinnerModel = function () {
 
   // API Calls
 
-  this.getAllDishes = function () {
-    const url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search'
+  this.getAllDishes = function (query, type) {
+    let url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search'
+    if(type && type.indexOf("All") === -1){
+      type = type.replace(/ /g,"+");
+      url += "?type="+ type;
+      if(query){
+        query = query.replace(/ /g,"+");
+        url += "&query=" + query;
+      }
+    }
+    else if(query){
+      query = query.replace(/ /g,"+");
+      url += "?query=" + query;
+    }
     return fetch(url, httpOptions)
       .then(processResponse)
       .catch(handleError)

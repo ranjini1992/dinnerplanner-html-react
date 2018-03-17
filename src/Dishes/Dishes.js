@@ -21,23 +21,50 @@ class Dishes extends Component {
   componentDidMount = () => {
     // when data is retrieved we update the state
     // this will cause the component to re-render
-    modelInstance.getAllDishes().then(dishes => {
-      this.setState({
-        status: 'LOADED',
-        dishes: dishes.results
-      })
+    modelInstance.getAllDishes(this.props.query, this.props.type).then(dishes => {
+      if(dishes.results.length != 0){
+        this.setState({
+          status: 'LOADED',
+          dishes: dishes.results
+        })
+      }else{
+        this.setState({
+          status: 'ERROR'
+        })
+      }
     }).catch(() => {
       this.setState({
         status: 'ERROR'
       })
     })
   }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+        status: 'INITIAL',
+    })
+    modelInstance.getAllDishes(newProps.query, newProps.type).then(dishes => {
+      if(dishes.results.length != 0){
+        this.setState({
+          status: 'LOADED',
+          dishes: dishes.results
+        })
+      }else{
+        this.setState({
+          status: 'ERROR'
+        })
+      }
+    }).catch(() => {
+      this.setState({
+        status: 'ERROR'
+      })
+    })
+  }
+
   returnImageLink = (imageFileName) => {
     return "https://spoonacular.com/recipeImages/" + imageFileName;
   }
-  returnDishLink = (id) => {
-    return "/dish/" + id;
-  }
+
   render() {
     let dishesList = null;
     
@@ -51,7 +78,7 @@ class Dishes extends Component {
       case 'LOADED':
         dishesList = this.state.dishes.map((dish) =>
         <Link to={"/dish/" + dish.id} key={dish.id}>
-            <figure className="dish-gallery" key={dish.id}>
+            <figure className="dish-gallery">
               <img className="image-box-sm" src={this.returnImageLink(dish.image)} alt={dish.title}/> 
               <figcaption>
                 {dish.title}
@@ -60,6 +87,7 @@ class Dishes extends Component {
         </Link>
         )
         break;
+      case 'ERROR':
       default:
         dishesList = <b>Failed to load data, please try again</b>
         break;

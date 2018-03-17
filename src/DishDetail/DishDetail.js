@@ -88,6 +88,7 @@ class DishDetail extends Component {
                 </div>
               </div>
         break;
+      case 'ERROR':
       default:
         dish = <b>Failed to load data, please try again</b>
         break;
