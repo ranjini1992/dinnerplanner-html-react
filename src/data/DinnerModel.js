@@ -4,8 +4,8 @@ const httpOptions = {
 
 const DinnerModel = function () {
 
-  let numberOfGuests = 4;
-  let selected_dishes = [];
+  let numberOfGuests = 1;
+  let menu = [];
 
   let observers = [];
 
@@ -13,22 +13,39 @@ const DinnerModel = function () {
 
   this.setNumberOfGuests = function (num) {
     numberOfGuests = num;
+    localStorage.setItem('numberOfGuests', num);
     notifyObservers("change_guests");
   };
 
   this.getNumberOfGuests = function () {
+    let browser_num_guests = parseInt(localStorage.getItem('numberOfGuests'));
+    if (browser_num_guests){
+      if(browser_num_guests !== numberOfGuests){
+        numberOfGuests = browser_num_guests;
+      }
+    }else{
+      localStorage.setItem('numberOfGuests', numberOfGuests);
+    }
     return numberOfGuests;
   };
 
   this.getFullMenu = function() {
-    return selected_dishes;
+    let browser_menu = JSON.parse(localStorage.getItem('menu'));
+    if (browser_menu){
+      if(browser_menu.length !== menu.length){
+        menu = browser_menu.slice();
+      }
+    }else{
+      localStorage.setItem('menu', JSON.stringify(menu));
+    }
+    return menu;
   }
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   this.getTotalMenuPrice = function() {
     let total_menu_price = 0;
-    for(let i = 0; i < selected_dishes.length; i++){
-      let dish = selected_dishes[i];
+    for(let i = 0; i < menu.length; i++){
+      let dish = menu[i];
       total_menu_price += dish.pricePerServing * numberOfGuests;
     }
     return total_menu_price;
@@ -40,12 +57,13 @@ const DinnerModel = function () {
   }
 
   this.addDishToMenu = function(selectedDish) {
-    for(let i = 0; i < selected_dishes.length; i++){
-        if (selected_dishes[i].id === selectedDish.id) {
+    for(let i = 0; i < menu.length; i++){
+        if (menu[i].id === selectedDish.id) {
           return;
         }
       }
-    selected_dishes.push(selectedDish);
+    menu.push(selectedDish);
+    localStorage.setItem('menu', JSON.stringify(menu));
     notifyObservers("add_dish");
   }
 

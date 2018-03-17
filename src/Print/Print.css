@@ -2,7 +2,7 @@
   margin: 5px;
   border: 1px solid #ccc;
   padding: 1em;
-  height: 200px;
+  height: 175px;
   text-align: center;
   box-shadow: 2px 2px 2px -2px rgba(0, 0, 0, 0.75);
 }
@@ -10,9 +10,10 @@
 .third-width {
   width: 30%;
   text-align: center;
+  font-size: 1em,
 }
 
 .image-box-xl {
   width: 175px;
-  height: 175px;
+  height: 150px;
 }

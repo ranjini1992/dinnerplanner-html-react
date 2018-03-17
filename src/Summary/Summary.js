@@ -20,6 +20,19 @@ class Summary extends Component {
     this.props.model.removeObserver(this)
   }
 
+  update(message) {
+    if(message === "change_guests"){
+       this.setState({
+        numberOfGuests: this.props.model.getNumberOfGuests(),
+      })
+    }
+    if(message === "add_dish"){
+       this.setState({
+        menu: this.props.model.getFullMenu()
+      })
+    }
+  }
+
   getRecipeRow = () => {
     if(!this.state.menu){
       return;

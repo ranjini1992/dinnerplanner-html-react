@@ -21,30 +21,19 @@ class Dishes extends Component {
   componentDidMount = () => {
     // when data is retrieved we update the state
     // this will cause the component to re-render
-    modelInstance.getAllDishes(this.props.query, this.props.type).then(dishes => {
-      if(dishes.results.length != 0){
-        this.setState({
-          status: 'LOADED',
-          dishes: dishes.results
-        })
-      }else{
-        this.setState({
-          status: 'ERROR'
-        })
-      }
-    }).catch(() => {
-      this.setState({
-        status: 'ERROR'
-      })
-    })
+    this.updateDishSearchView(this.props.query, this.props.type);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
         status: 'INITIAL',
     })
-    modelInstance.getAllDishes(newProps.query, newProps.type).then(dishes => {
-      if(dishes.results.length != 0){
+    this.updateDishSearchView(newProps.query, newProps.type);
+  }
+
+  updateDishSearchView(query, type){
+    modelInstance.getAllDishes(query, type).then(dishes => {
+      if(dishes.results.length !== 0){
         this.setState({
           status: 'LOADED',
           dishes: dishes.results

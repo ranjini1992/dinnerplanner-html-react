@@ -7,9 +7,8 @@
 }
 
 .next-btn {
-  width: 125px;
-  height: 35px;
-  padding: 9px 12px;	
+
+  padding: 9px 9px 9px 12px;	
   border-radius: 12px;
   background-color: #f0ad4e;
   border-color: #eea236;

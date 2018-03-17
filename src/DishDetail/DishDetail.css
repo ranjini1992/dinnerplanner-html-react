@@ -13,11 +13,9 @@
 }
 
 .dish-image {
-  width: 200px;
   margin: 5px;
   border: 1px solid #ccc;
   padding: 1em;
-  height:150px;
   text-align: center;
   box-shadow: 2px 2px 2px -2px rgba(0, 0, 0, 0.75);
 }
