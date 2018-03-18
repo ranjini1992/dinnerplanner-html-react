@@ -18,7 +18,7 @@ const DinnerModel = function () {
   };
 
   this.getNumberOfGuests = function () {
-    let browser_num_guests = parseInt(localStorage.getItem('numberOfGuests'));
+    let browser_num_guests = parseInt(localStorage.getItem('numberOfGuests'), 10);
     if (browser_num_guests){
       if(browser_num_guests !== numberOfGuests){
         numberOfGuests = browser_num_guests;
