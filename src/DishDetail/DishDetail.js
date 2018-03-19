@@ -10,12 +10,14 @@ class DishDetail extends Component {
     // We create the state to store the various statuses
     // e.g. API data loading or error 
     this.state = {
+      numberOfGuests: this.props.model.getNumberOfGuests(),
       status: 'INITIAL'
     }
   }
   componentDidMount = () => {
     // when data is retrieved we update the state
     // this will cause the component to re-render
+    this.props.model.addObserver(this);
     modelInstance.getDish(this.props.id).then(dish => {
       this.setState({
         status: 'LOADED',
@@ -29,12 +31,24 @@ class DishDetail extends Component {
 
   }
 
+  componentWillUnmount() {
+    this.props.model.removeObserver(this)
+  }
+
+  update(message) {
+    if(message === "change_guests"){
+       this.setState({
+        numberOfGuests: this.props.model.getNumberOfGuests(),
+      })
+    }
+  }
+
   getIngredientRow = () => {
     if(!this.state.dish.extendedIngredients){
       return;
     }
     const ingredients = this.state.dish.extendedIngredients.map((ingredient) =>  <tr key={ingredient.id}>
-        <th> {ingredient.amount.toFixed(1) + ' ' + ingredient.unit}</th>
+        <th> {ingredient.amount.toFixed(1)*this.state.numberOfGuests + ' ' + ingredient.unit}</th>
          <th className="full-width"> {ingredient.name}</th>
         <th> <img className="image-box-xs" src={ingredient.image} alt={ingredient.name} /> </th>
       </tr>
@@ -49,9 +63,6 @@ class DishDetail extends Component {
   render() {
     let dish = null;
     
-    // depending on the state we either generate
-    // useful message to the user or show the list
-    // of returned dishes
     switch (this.state.status) {
       case 'INITIAL':
         dish = <em>Loading...</em>
@@ -74,7 +85,7 @@ class DishDetail extends Component {
                   </Link>
                 </div>
                 <div className= "ingredient-box">
-                  <h3> INGREDIENTS FOR {this.props.model.getNumberOfGuests()} PEOPLE </h3>
+                  <h3> INGREDIENTS FOR {this.state.numberOfGuests} PEOPLE </h3>
 
                   <table className="full-width">
                     <tbody>

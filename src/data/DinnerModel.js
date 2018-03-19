@@ -17,6 +17,22 @@ const DinnerModel = function () {
     notifyObservers("change_guests");
   };
 
+  this.changeProps = function (query, type) {
+    localStorage.setItem('type', type);
+    localStorage.setItem('query', query);
+    notifyObservers("change_props");
+  }
+
+  this.getType = function () {
+    let type = localStorage.getItem('type');
+    return type;
+  }
+
+  this.getQuery = function () {
+    let query = localStorage.getItem('query');
+    return query;
+  }
+  
   this.getNumberOfGuests = function () {
     let browser_num_guests = parseInt(localStorage.getItem('numberOfGuests'), 10);
     if (browser_num_guests){

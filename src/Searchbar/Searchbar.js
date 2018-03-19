@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Searchbar.css';
-import { Link } from 'react-router-dom';
 
 class Searchbar extends Component {
   constructor(props) {
@@ -47,9 +46,7 @@ class Searchbar extends Component {
           }
          
     		</select> {" "}
-        <Link to={this.returnSearchLink()}>
-            <button className="next-btn">Search</button>
-        </Link>
+        <button onClick={() => this.props.model.changeProps(this.state.queryString, this.state.selectedDishType)} className="next-btn">Search</button>
         
       </div>
     );

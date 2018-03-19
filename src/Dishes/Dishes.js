@@ -21,14 +21,23 @@ class Dishes extends Component {
   componentDidMount = () => {
     // when data is retrieved we update the state
     // this will cause the component to re-render
+    modelInstance.addObserver(this)
     this.updateDishSearchView(this.props.query, this.props.type);
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({
+  componentWillUnmount() {
+    modelInstance.removeObserver(this)
+  }
+
+  update(message) {
+    if(message === "change_props"){
+      this.setState({
         status: 'INITIAL',
-    })
-    this.updateDishSearchView(newProps.query, newProps.type);
+      })
+      let type = modelInstance.getType();
+      let query = modelInstance.getQuery();
+      this.updateDishSearchView(query, type);
+    }
   }
 
   updateDishSearchView(query, type){
